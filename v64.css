@@ -1,0 +1,15 @@
+#iphone-shell {max-width:1100px;margin:auto}
+#iphone-shell input {box-sizing:border-box;width:100%;min-width:0;background:#0d1722;color:#eef3f9;border:1px solid #465666;border-radius:8px;padding:12px;font-size:16px}
+#iphone-shell label {display:block;margin:12px 0;color:#cbd8e5}
+#iphone-shell p {line-height:1.55}
+#iphone-shell .ios-event-title {white-space:normal;overflow-wrap:anywhere;line-height:1.4}
+#iphone-shell .ios-tabs button {font-size:12px;min-height:44px;padding:8px 0}
+#iphone-shell .month-events {padding:8px}
+.v64-fields,.v64-invoice-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#v64-sync {border-top:1px solid #465666;margin-top:24px;padding-top:12px}
+#v64-sync button {margin:8px 0}
+#iphone-shell small {display:block;color:#a6b7c8;margin-top:6px}
+@media(min-width:821px){#ios-month-list {display:grid;grid-template-columns:1fr 1fr;gap:16px} .v64-invoice-grid{grid-template-columns:repeat(3,1fr)}}
+/* html2canvas does not parse CSS color-mix(); keep export holiday colors readable. */
+.exportCompact .holidayCell.isSchoolHoliday {background:var(--holidays,#6385af)!important;box-shadow:inset 0 0 0 1px #aab7c5!important}
+.exportCompact .holidayCell.isEstimatedHoliday {background:repeating-linear-gradient(135deg,var(--holidays,#6385af) 0 5px,#263241 5px 10px)!important}

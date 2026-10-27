@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Racing Operations Dashboard 2027-2036 — V62.1</title><style>
+<title>Racing Operations Dashboard 2027-2036 — V64</title><style>
 :root{--green:#1f6f43;--grid:#46505c;--paper:#11161d;--sat:#18222b;--sun:#211d28;--mon:#1b2028;
 --elms:#b08a20;--wec:#176da5;--imsa:#c84f36;--other:#6d55a4;--additional:#52606d;--elms-font:#ffffff;--wec-font:#ffffff;--imsa-font:#ffffff;--other-font:#ffffff;--additional-font:#ffffff;--text:#eef3f8;--muted:#96a2b1}
 *{box-sizing:border-box} body{margin:0;background:#090c10;font-family:Arial,Helvetica,sans-serif;color:var(--text)}
@@ -215,7 +215,7 @@ body{background:radial-gradient(circle at 18% -10%,#17212d 0,#0a0e14 34%,#070a0e
 #printPreviewPage{position:relative;width:100%;aspect-ratio:291/204;background:#fff;overflow:hidden;box-shadow:0 0 0 1px #4a5661}
 #printPreviewScale{position:absolute;left:0;top:0;transform-origin:top left}
 @media print{#printPreviewOverlay{display:none!important}}
-</style><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</style><script src="./vendor/html2canvas.js"></script>
 
 <style id="v53-bank-holiday-red">
 /* V56: National French bank holidays are fixed red; school holidays keep the configurable Holidays colour. */
@@ -250,7 +250,7 @@ body.drag-operation .laneCell.drag-target{outline:2px solid #e6f4ff!important;ba
 .exportCompact .month .weekday{font-size:9px!important}
 </style><meta name="theme-color" content="#10251e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Race Calendar"><meta name="mobile-web-app-capable" content="yes"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png"><link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"><style id="ios-app-styles">
 #iphone-shell,#returnPhone{display:none}
-@media (max-width: 820px) {
+@media screen {
   html{background:#080d14}
   body.iphone-app{background:#080d14;min-height:100dvh;overscroll-behavior-y:contain}
   body.iphone-app > :not(#iphone-shell):not(script):not(style){display:none!important}
@@ -272,7 +272,7 @@ body.drag-operation .laneCell.drag-target{outline:2px solid #e6f4ff!important;ba
   #iphone-shell .ios-stat{padding:13px 10px;border:1px solid #2b3949;background:#121d29;border-radius:14px}
   #iphone-shell .ios-value{display:block;font-size:25px;font-weight:850;line-height:1.1;font-variant-numeric:tabular-nums}
   #iphone-shell .ios-stat small{font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--soft);font-weight:700}
-  #iphone-shell .ios-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:0 15px 17px;padding:4px;border-radius:14px;background:#121c27;border:1px solid #2a3744}
+  #iphone-shell .ios-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;margin:0 10px 17px;padding:4px;border-radius:14px;background:#121c27;border:1px solid #2a3744}
   #iphone-shell .ios-tabs button{color:#a6b7c8;padding:10px 4px;font-size:13px;font-weight:750;border:0;background:transparent;border-radius:10px}
   #iphone-shell .ios-tabs button[aria-selected="true"]{background:#285f4b;color:#fff;box-shadow:0 1px 4px #0005}
   #iphone-shell .ios-content{padding:0 15px}
@@ -325,7 +325,7 @@ body.drag-operation .laneCell.drag-target{outline:2px solid #e6f4ff!important;ba
 }
 </style>
 <style id="month-title-visibility-fix-v62-1">
-/* V62.1: Month names occupy the header row only (not the ELMS row). */
+/* V64: Month names occupy the header row only (not the ELMS row). */
 .month .monthName {
   grid-column:1!important;grid-row:1 / 2!important;
   align-items:center!important;justify-content:flex-start!important;
@@ -335,8 +335,8 @@ body.drag-operation .laneCell.drag-target{outline:2px solid #e6f4ff!important;ba
 }
 .exportCompact .month .monthName {font-size:12px!important;padding-left:8px!important;}
 </style>
-</head><body>
-<div class="toolbar"><strong id="toolbarTitle">2027 RACING / WORK CALENDAR — V62.1</strong><span class="opsBadge">RACE OPERATIONS</span><label class="yearPick">Year <select id="yearSelect"><option value="2027" selected>2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option><option value="2031">2031</option><option value="2032">2032</option><option value="2033">2033</option><option value="2034">2034</option><option value="2035">2035</option><option value="2036">2036</option></select></label>
+<link rel="stylesheet" href="./v64.css"></head><body>
+<div class="toolbar"><strong id="toolbarTitle">2027 RACING / WORK CALENDAR — V64</strong><span class="opsBadge">RACE OPERATIONS</span><label class="yearPick">Year <select id="yearSelect"><option value="2027" selected>2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option><option value="2031">2031</option><option value="2032">2032</option><option value="2033">2033</option><option value="2034">2034</option><option value="2035">2035</option><option value="2036">2036</option></select></label>
 <label class="colorPick">Colour
 <select id="colourSeries">
 <option value="ELMS">ELMS</option><option value="WEC">WEC</option><option value="IMSA">IMSA</option><option value="OTHER">Le Mans / Kyalami / Bathurst</option><option value="ADDITIONAL">Additional</option><option value="HOLIDAYS">Holidays</option>
@@ -849,7 +849,7 @@ function buildCalendar(){
   sheet.insertBefore(sec,legend);
  }
  monthSections=[...document.querySelectorAll(".month")];
- document.getElementById("toolbarTitle").textContent=`${currentYear} RACING / WORK CALENDAR — V62.1`;
+ document.getElementById("toolbarTitle").textContent=`${currentYear} RACING / WORK CALENDAR — V64`;
  document.getElementById("calendarTitle").textContent=`Calendar ${currentYear}`;
  document.getElementById("summaryYearTitle").textContent=`${currentYear} DAYS SUMMARY`;
 }
@@ -1125,7 +1125,7 @@ document.getElementById("copyCalendarBtn").onclick=async function(){
   try{
     host=document.createElement("div");host.style.cssText="position:absolute;left:-100000px;top:0;background:#0b1016";
     const clone=makeExportCalendar();host.appendChild(clone);document.body.appendChild(host);
-    const source=await html2canvas(clone,{scale:2,useCORS:true,backgroundColor:"#0b1016",logging:false});
+    const source=await html2canvas(clone,{scale:2,useCORS:true,backgroundColor:"#0b1016",logging:false,ignoreElements:node=>node.tagName==="IFRAME"||node.id==="iphone-shell"});
     const canvas=document.createElement("canvas");canvas.width=2910;canvas.height=2040;
     canvas.getContext("2d").drawImage(source,0,0,2910,2040);
     const blob=await new Promise((ok,bad)=>canvas.toBlob(b=>b?ok(b):bad(new Error("JPG failed")),"image/jpeg",0.95));
@@ -1195,8 +1195,8 @@ function collectCalendarState(){
     state.colours[s]=bg;
     state.fontColours[s]=fg;
   });
-  document.querySelectorAll(".rateRow").forEach(function(row){
-    const key=row.dataset.series;
+  document.querySelectorAll("[data-rate-series]").forEach(function(row){
+    const key=row.dataset.rateSeries;
     if(!key)return;
     state.rates[key]={
       work: row.querySelector(".clientWorkRate")?.value ?? "0",
@@ -1210,13 +1210,22 @@ function collectCalendarState(){
 }
 
 async function downloadCurrentHtml(){
-  const state=collectCalendarState();
+  const state=window.calendarApp?.snapshot() || collectCalendarState();
   const clone=document.documentElement.cloneNode(true);
   clone.querySelector('#embeddedCalendarState')?.remove();
   const embed=document.createElement('script');
   embed.id='embeddedCalendarState';embed.type='application/json';
   embed.textContent=JSON.stringify(state).replace(/</g,"\\u003c");
   clone.querySelector('body').appendChild(embed);
+  // Embed local assets so saved HTML remains usable away from GitHub Pages.
+  for(const node of clone.querySelectorAll('script[src^="./"],link[href="./v64.css"]')){
+    const path=node.getAttribute('src') || node.getAttribute('href');
+    const response=await fetch(path);if(!response.ok)throw new Error('Cannot embed '+path);
+    const inline=document.createElement(node.tagName==='SCRIPT'?'script':'style');
+    inline.textContent=(await response.text()).replace(/<\/script/gi,'<\\/script');node.replaceWith(inline);
+  }
+  // Credentials and authentication controls are never included in portable exports.
+  clone.querySelector('#v64-sync')?.replaceChildren();
   let source="<!doctype html>\n"+clone.outerHTML;
   const blob=new Blob([source],{type:"text/html;charset=utf-8"});
   const suggested="racing_calendar_"+currentYear+"_saved.html";
@@ -1278,8 +1287,8 @@ function applyEmbeddedCalendarState(){
       Object.keys(s.fontColours).forEach(k=>{if(fontColourVars[k])document.documentElement.style.setProperty(fontColourVars[k],s.fontColours[k]);});
     }
     if(s.rates){
-      document.querySelectorAll(".rateRow").forEach(function(row){
-        const v=s.rates[row.dataset.series]; if(!v)return;
+      document.querySelectorAll("[data-rate-series]").forEach(function(row){
+        const v=s.rates[row.dataset.rateSeries]; if(!v)return;
         if(row.querySelector(".clientWorkRate")) row.querySelector(".clientWorkRate").value=v.work;
         if(row.querySelector(".clientTravelRate")) row.querySelector(".clientTravelRate").value=v.travel;
         if(row.querySelector(".clientHomeDays")) row.querySelector(".clientHomeDays").value=v.homeDays;
@@ -1287,8 +1296,8 @@ function applyEmbeddedCalendarState(){
         if(row.querySelector(".clientRateCoef")) row.querySelector(".clientRateCoef").value=(v.coefficient ?? "1");
       });
     }
+    document.getElementById("taxRatePercent").value=s.taxRatePercent ?? 0;
     renderBars();
-    updateSummary();
     applyFilters();
     if(typeof updateRates==="function") updateRates();
   }catch(e){console.error("Saved calendar state could not be loaded",e);}
@@ -1462,18 +1471,18 @@ document.getElementById("exportOutlookBtn").onclick=()=>{
 document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Show / hide "+b.textContent.trim()+" calendar line");
 </script><iframe id="print_frame" name="print_frame" title="Calendar print frame" style="position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden" src="about:blank"></iframe>
 <div id="iphone-shell" lang="fr">
-  <header class="ios-top"><div class="ios-eyebrow">RACING OPERATIONS · VERSION iPHONE</div><div class="ios-title">Race <span>Calendar</span></div><div class="ios-sub">ELMS · WEC · IMSA · Endurance · Additional</div></header>
+  <header class="ios-top"><div class="ios-eyebrow">RACING OPERATIONS · V64</div><div class="ios-title">Race <span>Calendar</span></div><div class="ios-sub">ELMS · WEC · IMSA · Endurance · Additional</div></header>
   <div class="ios-control"><select aria-label="Année" class="ios-select" id="ios-year"></select><div class="ios-status" id="ios-status" role="status">Enregistré localement</div></div>
   <div class="ios-stats"><div class="ios-stat"><span class="ios-value" id="ios-away">0</span><small>Jours absents</small></div><div class="ios-stat"><span class="ios-value" id="ios-work">0</span><small>Jours travail</small></div><div class="ios-stat"><span class="ios-value" id="ios-travel">0</span><small>Jours voyage</small></div></div>
-  <nav class="ios-tabs" aria-label="Vues du calendrier"><button type="button" id="ios-tab-agenda" data-tab="agenda" aria-selected="true">Agenda</button><button type="button" id="ios-tab-months" data-tab="months" aria-selected="false">Calendrier</button><button type="button" id="ios-tab-settings" data-tab="settings" aria-selected="false">Réglages</button></nav>
+  <nav class="ios-tabs" aria-label="Vues du calendrier"><button type="button" id="ios-tab-agenda" data-tab="agenda" aria-selected="true">Agenda</button><button type="button" id="ios-tab-months" data-tab="months" aria-selected="false">Calendar</button><button type="button" id="ios-tab-tariffs" data-tab="tariffs" aria-selected="false">Tariffs</button><button type="button" id="ios-tab-invoicing" data-tab="invoicing" aria-selected="false">Invoicing</button><button type="button" id="ios-tab-settings" data-tab="settings" aria-selected="false">Settings</button></nav>
   <main class="ios-content">
    <section id="ios-agenda" aria-label="Événements"><div id="ios-event-list"></div></section>
-   <section id="ios-months" aria-label="Calendrier mensuel" hidden><div id="ios-month-list"></div></section>
-   <section id="ios-settings" aria-label="Sauvegarde et options" hidden>
+   <section id="ios-months" aria-label="Calendrier mensuel" hidden><button class="ios-btn secondary" id="v64-full-calendar">Open full desktop calendar</button><div id="ios-month-list"></div></section>
+   <section id="ios-tariffs" hidden></section><section id="ios-invoicing" hidden></section><section id="ios-settings" aria-label="Sauvegarde et options" hidden>
     <div class="ios-settings-card"><h3>Sauvegarde du calendrier</h3><p>Les modifications sont enregistrées automatiquement sur cet iPhone. Exporte régulièrement un fichier JSON pour ne pas perdre tes données si le stockage de l’application est effacé.</p><button type="button" class="ios-btn" id="ios-backup">Exporter ma sauvegarde JSON</button></div>
     <div class="ios-settings-card"><h3>Restaurer une sauvegarde</h3><p>Importer une sauvegarde JSON de cette application, ou un fichier HTML créé avec « SAVE CALENDAR FILE » dans la V62 sur ton Lenovo.</p><button type="button" class="ios-btn secondary" id="ios-import">Importer JSON / HTML V62</button><input type="file" id="ios-import-file" accept=".json,.html,application/json,text/html" hidden></div>
-    <div class="ios-settings-card"><h3>Version complète V62</h3><p>Accéder à toutes les fonctions du calendrier original, notamment tarifs, impression, export .ICS, jours fériés et événements familiaux. La vue de bureau peut défiler horizontalement.</p><button type="button" class="ios-btn secondary" id="ios-desktop">Ouvrir la version complète</button></div>
-    <p class="ios-bottomhint">Sans serveur ni compte. Les données de ce téléphone ne se synchronisent pas automatiquement avec ton Lenovo ou un autre appareil.</p>
+    <div class="ios-settings-card"><h3>Version complète V64</h3><p>Accéder à toutes les fonctions du calendrier original, notamment tarifs, impression, export .ICS, jours fériés et événements familiaux. La vue de bureau peut défiler horizontalement.</p><button type="button" class="ios-btn secondary" id="ios-desktop">Ouvrir la version complète</button></div>
+    <div id="v64-sync"></div><p class="ios-bottomhint">Local-first. Optional private Supabase synchronization between your devices.</p>
    </section>
   </main>
   <button type="button" id="ios-add" class="ios-fab" aria-label="Ajouter un événement">+</button>
@@ -1485,7 +1494,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
   <div class="ios-overlay" id="ios-day-overlay" hidden><div class="ios-panel" role="dialog" aria-modal="true"><div class="ios-panel-head"><h2 id="ios-day-heading">Date</h2><button class="ios-close" type="button" id="ios-day-close" aria-label="Fermer">×</button></div><div id="ios-day-events"></div></div></div>
 </div>
 <button id="returnPhone" type="button">↩ Version iPhone</button>
-<script id="ios-app-controller">
+<script src="./vendor/supabase.js"></script><script src="./v64.js"></script><script id="ios-app-controller">
 (()=>{
   'use strict';
   const APP_KEY='loic-racing-calendar-pwa-v1';
@@ -1504,21 +1513,23 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
     for(const [k,v] of yearStates.entries()) years[String(k)]=v;
     saved.years=years;
     saved._format='racing-calendar-iphone-v1';
+    saved.v64=window.calendarV64?.getData() || {};
     return saved;
   }
   function persist(){
-    if(!ready||restoring)return;
-    try{localStorage.setItem(APP_KEY,JSON.stringify(snapshot()));el('ios-status').textContent='Enregistré sur cet iPhone';}
+    if(!ready||restoring||window.calendarStorageBlocked)return;
+    try{localStorage.setItem(APP_KEY,JSON.stringify(snapshot()));el('ios-status').textContent='Enregistré sur cet appareil';window.dispatchEvent(new Event('calendar-saved'));}
     catch(e){el('ios-status').textContent='Stockage indisponible : exporter une sauvegarde';console.warn('Cannot save calendar',e);}
   }
   function saveSoon(){
-    if(!ready||restoring)return;
+    if(!ready||restoring||window.calendarStorageBlocked)return;
     el('ios-status').textContent='Enregistrement…';
     clearTimeout(saveTimer);saveTimer=setTimeout(persist,260);
     clearTimeout(renderTimer);renderTimer=setTimeout(renderMobile,100);
   }
   function restore(s){
     if(!s||!s.selected||typeof s.selected!=='object')throw new Error('Fichier JSON non reconnu');
+    window.calendarV64?.validate(s);
     restoring=true;
     try{
       // Reuse the exact V62 restoration logic to preserve all existing settings.
@@ -1530,6 +1541,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
       if(s.years && typeof s.years==='object') {
         for(const [k,v] of Object.entries(s.years))if(/^20\d\d$/.test(k)&&v&&typeof v==='object')yearStates.set(Number(k),v);
       }
+      window.calendarV64?.restoreData(s.v64);
       snapshotYear();
       el('yearSelect').value=String(currentYear);
       buildCalendar();refresh();
@@ -1588,7 +1600,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
         const dow=new Date(Date.UTC(currentYear,m-1,day)).getUTCDay();
         dates+=`<button type="button" class="ios-day ${dow===0||dow===6?'weekend':''} ${today===ds?'today':''}" data-date="${ds}" aria-label="${day} ${MONTHS[m-1]} : ${present.join(', ')||'libre'}"><span>${day}</span><span class="ios-dotrow">${present.map(s=>`<i class="ios-dot" style="background:${COLORS[s]}"></i>`).join('')}</span></button>`;
       }
-      markup+=`<section class="ios-mcard"><div class="ios-mhead">${MONTHS[m-1]}<small>${occupied} jours occupés</small></div><div class="ios-week"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div><div class="ios-grid">${dates}</div></section>`;
+      markup+=`<section class="ios-mcard"><div class="ios-mhead">${MONTHS[m-1]}<small>${occupied} jours occupés</small></div><div class="ios-week"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div><div class="ios-grid">${dates}</div><div class="month-events">${runs().map((e,i)=>({...e,index:i})).filter(e=>Number(e.a.slice(5,7))<=m&&Number(e.b.slice(5,7))>=m).map(e=>eventHtml(e,e.index)).join('')}</div></section>`;
     }
     el('ios-month-list').innerHTML=markup;
   }
@@ -1601,14 +1613,16 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
     el('ios-travel').textContent=counts.travel;
     renderAgenda(items);
     if(tab==='months')renderMonths();
+    if(tab==='invoicing'&&el('ios-invoicing').dataset.year!==String(currentYear)){window.calendarV64.render(tab);el('ios-invoicing').dataset.year=String(currentYear);}
   }
   function showTab(newTab){
     tab=newTab;
-    ['agenda','months','settings'].forEach(t=>{
+    ['agenda','months','tariffs','invoicing','settings'].forEach(t=>{
       el('ios-'+t).hidden=t!==tab;
       el('ios-tab-'+t).setAttribute('aria-selected',t===tab?'true':'false');
     });
-    el('ios-add').hidden=tab==='settings';
+    el('ios-add').hidden=!['agenda','months'].includes(tab);
+    window.calendarV64?.render(tab);
     renderMobile();
   }
   function openEditor(item=null){
@@ -1689,18 +1703,22 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
       }else s=JSON.parse(raw);
       if(!s.selected||!s.year)throw new Error('Sauvegarde invalide');
       if(!confirm('Remplacer les données actuelles par cette sauvegarde ?'))return;
-      restore(s);persist();showTab('agenda');el('ios-status').textContent='Sauvegarde restaurée';
+      window.calendarV64.validate(s);localStorage.setItem(APP_KEY+'-before-import',JSON.stringify(snapshot()));
+      restore(s);window.calendarStorageBlocked=false;persist();showTab('agenda');el('ios-status').textContent='Sauvegarde restaurée';
     }catch(err){alert('Impossible de restaurer ce fichier : '+err.message)}
     finally{e.target.value='';}
   }
   function init(){
     const mobile=el('iphone-shell'); if(!mobile)return;
-    const uaYear=el('ios-year');
+    const uaYear=el('ios-year');uaYear.replaceChildren();
     for(let y=2027;y<=2036;y++){const opt=document.createElement('option');opt.value=y;opt.textContent=y;uaYear.appendChild(opt);}
-    const saved=localStorage.getItem(APP_KEY);
-    if(saved){try{restore(JSON.parse(saved))}catch(err){console.warn('iPhone calendar backup failed to restore',err);}}
+    window.calendarApp={snapshot,restore,persist,saveSoon,runs,showTab};
+    let saved;try{saved=localStorage.getItem(APP_KEY)}catch(e){el('ios-status').textContent='Storage unavailable; export backups';}
+    if(saved){try{restore(JSON.parse(saved))}catch(err){window.calendarStorageBlocked=true;el('ios-status').textContent='Saved data could not be loaded. Export or repair it before saving.';console.warn('Saved data retained',err);}}
+    if(!saved&&el('embeddedCalendarState')){try{restore(JSON.parse(el('embeddedCalendarState').textContent))}catch(e){console.warn('Embedded backup invalid',e)}}
     ready=true;document.body.classList.add('iphone-app');
-    if(navigator.serviceWorker&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Offline mode not available',err));
+    window.calendarV64.init();
+    if(navigator.serviceWorker&&(location.protocol==='https:'||location.hostname==='127.0.0.1'||location.hostname==='localhost'))navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Offline mode not available',err));
     uaYear.addEventListener('change',e=>{const otherYear=Number(e.target.value);el('yearSelect').value=String(otherYear);el('yearSelect').dispatchEvent(new Event('change'));renderMobile();saveSoon();});
     document.querySelectorAll('#iphone-shell [data-tab]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
     el('ios-add').onclick=()=>openEditor();
@@ -1709,13 +1727,14 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
     el('ios-form').addEventListener('submit',commitEditor);
     el('ios-delete').addEventListener('click',deleteEditor);
     el('ios-event-list').addEventListener('click',e=>{const x=e.target.closest('[data-event-index]');if(x)openEditor(runs()[Number(x.dataset.eventIndex)])});
-    el('ios-month-list').addEventListener('click',e=>{const x=e.target.closest('[data-date]');if(x)openDay(x.dataset.date)});
+    el('ios-month-list').addEventListener('click',e=>{const x=e.target.closest('[data-date]');if(x)openDay(x.dataset.date);const ev=e.target.closest('[data-event-index]');if(ev)openEditor(runs()[Number(ev.dataset.eventIndex)])});
     el('ios-day-close').onclick=()=>el('ios-day-overlay').hidden=true;
     el('ios-day-overlay').addEventListener('click',e=>{if(e.target===el('ios-day-overlay'))el('ios-day-overlay').hidden=true});
     el('ios-day-events').addEventListener('click',e=>{const x=e.target.closest('[data-event-index]');if(x){el('ios-day-overlay').hidden=true;openEditor(runs()[Number(x.dataset.eventIndex)])}});
     el('ios-backup').onclick=backup;
     el('ios-import').onclick=()=>el('ios-import-file').click();
     el('ios-import-file').addEventListener('change',importFile);
+    el('v64-full-calendar').onclick=()=>document.body.classList.remove('iphone-app');
     el('ios-desktop').onclick=()=>{document.body.classList.remove('iphone-app')};
     el('returnPhone').onclick=()=>{document.body.classList.add('iphone-app');showTab('agenda')};
     // Persist edits performed in the original dashboard too, not only mobile form edits.

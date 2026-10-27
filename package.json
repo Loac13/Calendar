@@ -1,0 +1,27 @@
+{
+  "name": "calendar",
+  "version": "64.0.0",
+  "description": "Racing Calendar 2027–2036",
+  "scripts": {
+    "test": "node --test tests/rls.test.cjs && playwright test",
+    "build:vendor": "esbuild vendor/entry.js --bundle --format=iife --global-name=supabase --outfile=vendor/supabase.js --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loac13/Calendar.git"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.12",
+    "@playwright/test": "^1.64.1",
+    "esbuild": "^0.28.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "html2canvas": "^1.4.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
