@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Racing Operations Dashboard 2027-2036 — V64</title><style>
 :root{--green:#1f6f43;--grid:#46505c;--paper:#11161d;--sat:#18222b;--sun:#211d28;--mon:#1b2028;
 --elms:#b08a20;--wec:#176da5;--imsa:#c84f36;--other:#6d55a4;--additional:#52606d;--elms-font:#ffffff;--wec-font:#ffffff;--imsa-font:#ffffff;--other-font:#ffffff;--additional-font:#ffffff;--text:#eef3f8;--muted:#96a2b1}
@@ -503,7 +503,7 @@ const hidden=new Set();
 function frenchHolidays(year){
  const easter=(()=>{const a=year%19,b=Math.floor(year/100),c=year%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k+7)%7,m=Math.floor((a+11*h+22*l)/451),month=Math.floor((h+l-7*m+114)/31),day=((h+l-7*m+114)%31)+1;return new Date(Date.UTC(year,month-1,day));})();
  const movable=(days)=>{const d=new Date(easter);d.setUTCDate(d.getUTCDate()+days);return iso(d);};
- return new Map([[`${year}-01-01`,`Jour de l’An`],[movable(1),`Lundi de Pâques`],[`${year}-05-01`,`Fête du Travail`],[`${year}-05-08`,`Victoire 1945`],[movable(39),`Ascension`],[movable(50),`Lundi de Pentecôte`],[`${year}-07-14`,`Fête nationale`],[`${year}-08-15`,`Assomption`],[`${year}-11-01`,`Toussaint`],[`${year}-11-11`,`Armistice 1918`],[`${year}-12-25`,`Noël`]]);
+ return new Map([[`${year}-01-01`,`New Year’s Day`],[movable(1),`Easter Monday`],[`${year}-05-01`,`Labour Day`],[`${year}-05-08`,`Victory in Europe Day`],[movable(39),`Ascension`],[movable(50),`Whit Monday`],[`${year}-07-14`,`Bastille Day`],[`${year}-08-15`,`Assumption Day`],[`${year}-11-01`,`All Saints’ Day`],[`${year}-11-11`,`Armistice Day`],[`${year}-12-25`,`Christmas`]]);
 }
 
 
@@ -511,17 +511,17 @@ function frenchHolidays(year){
 // For school years 2028-29 onwards the dates below are planning estimates,
 // visibly marked EST; they must not be mistaken for published school calendars.
 const ZONE_A_PERIODS=[
- ["2026-12-20","2027-01-03","Noël · Zone A",true],
- ["2027-02-14","2027-02-28","Hiver · Zone A",true],
- ["2027-04-11","2027-04-25","Printemps · Zone A",true],
- ["2027-05-07","2027-05-07","Pont · Zone A",true],
- ["2027-07-04","2027-09-01","Été · Zone A",true],
- ["2027-10-24","2027-11-07","Toussaint · Zone A",true],
- ["2027-12-19","2028-01-02","Noël · Zone A",true],
- ["2028-02-20","2028-03-05","Hiver · Zone A",true],
- ["2028-04-23","2028-05-08","Printemps · Zone A",true],
- ["2028-05-26","2028-05-27","Pont · Zone A",true],
- ["2028-07-05","2028-08-31","Été · Zone A",false]
+ ["2026-12-20","2027-01-03","Christmas · Zone A",true],
+ ["2027-02-14","2027-02-28","Winter · Zone A",true],
+ ["2027-04-11","2027-04-25","Spring · Zone A",true],
+ ["2027-05-07","2027-05-07","Ascension break · Zone A",true],
+ ["2027-07-04","2027-09-01","Summer · Zone A",true],
+ ["2027-10-24","2027-11-07","All Saints’ Day · Zone A",true],
+ ["2027-12-19","2028-01-02","Christmas · Zone A",true],
+ ["2028-02-20","2028-03-05","Winter · Zone A",true],
+ ["2028-04-23","2028-05-08","Spring · Zone A",true],
+ ["2028-05-26","2028-05-27","Ascension break · Zone A",true],
+ ["2028-07-05","2028-08-31","Summer · Zone A",false]
 ];
 function firstSaturdayOnOrAfter(year,month,day){const d=new Date(Date.UTC(year,month-1,day));d.setUTCDate(d.getUTCDate()+(6-d.getUTCDay()+7)%7);return iso(d);}
 function addSchoolPeriod(start,end,name,official){ZONE_A_PERIODS.push([start,end,name,official]);}
@@ -529,14 +529,14 @@ function addSchoolPeriod(start,end,name,official){ZONE_A_PERIODS.push([start,end
 // rotation. Actual dates are subject to future government announcements.
 for(let y=2028;y<=2036;y++){
  const autumn=firstSaturdayOnOrAfter(y,10,17);
- addSchoolPeriod(shift(autumn,1),shift(autumn,15),"Toussaint · Zone A",false);
+ addSchoolPeriod(shift(autumn,1),shift(autumn,15),"All Saints’ Day · Zone A",false);
  const christmas=firstSaturdayOnOrAfter(y,12,19);
- addSchoolPeriod(shift(christmas,1),shift(christmas,15),"Noël · Zone A",false);
+ addSchoolPeriod(shift(christmas,1),shift(christmas,15),"Christmas · Zone A",false);
  const winter=firstSaturdayOnOrAfter(y,2,5+7*((y-2028)%3));
- addSchoolPeriod(shift(winter,1),shift(winter,15),"Hiver · Zone A",false);
+ addSchoolPeriod(shift(winter,1),shift(winter,15),"Winter · Zone A",false);
  const spring=firstSaturdayOnOrAfter(y,4,3+7*((y-2028)%3));
- addSchoolPeriod(shift(spring,1),shift(spring,15),"Printemps · Zone A",false);
- if(y>=2029){const summer=firstSaturdayOnOrAfter(y,7,3);addSchoolPeriod(shift(summer,1),`${y}-08-31`,"Été · Zone A",false);}
+ addSchoolPeriod(shift(spring,1),shift(spring,15),"Spring · Zone A",false);
+ if(y>=2029){const summer=firstSaturdayOnOrAfter(y,7,3);addSchoolPeriod(shift(summer,1),`${y}-08-31`,"Summer · Zone A",false);}
 }
 // Official school-calendar records are downloaded only on explicit user request.
 // One academy per zone avoids duplicate entries for the same vacation period.
@@ -550,6 +550,17 @@ function dateInParis(value){
  const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Paris",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);
  const get=t=>parts.find(x=>x.type===t)?.value;
  return `${get("year")}-${get("month")}-${get("day")}`;
+}
+// Translate official labels for display only; cached source records stay unchanged.
+function schoolHolidayLabel(name){
+ const text=String(name).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ if(/noel|christmas/.test(text))return 'Christmas break';
+ if(/hiver|winter/.test(text))return 'Winter break';
+ if(/printemps|spring/.test(text))return 'Spring break';
+ if(/toussaint|all saints/.test(text))return 'Autumn break';
+ if(/ete|summer/.test(text))return 'Summer break';
+ if(/ascension|pont/.test(text))return 'Ascension break';
+ return 'School holiday';
 }
 function schoolHolidays(year){
  const map=new Map();
@@ -567,7 +578,7 @@ function schoolHolidays(year){
   // API end is the morning of return to school; exclude that date.
   const from=shift(item.start,1),to=shift(item.end,-1);
   if(to<from)continue;
-  for(const date of range(from,to))if(date.startsWith(year+"-"))map.set(date,{name:item.name+" · Zone "+holidayZone,official:true});
+  for(const date of range(from,to))if(date.startsWith(year+"-"))map.set(date,{name:schoolHolidayLabel(item.name)+" · Zone "+holidayZone,official:true});
  }
  return map;
 }
@@ -601,7 +612,7 @@ async function updateOfficialHolidays(){
   officialSchoolRecords=zones;
   holidayLastUpdated=new Date().toISOString();
   refresh();
-  status.textContent="Updated " +new Date(holidayLastUpdated).toLocaleDateString()+" · official dates for A / B / C. Save calendar file to keep updates offline.";
+  status.textContent="Updated " +new Date(holidayLastUpdated).toLocaleDateString("en-GB")+" · official dates for A / B / C. Save calendar file to keep updates offline.";
  }catch(err){console.error(err);status.textContent="Update failed: "+err.message+". Existing holiday data retained.";}
  finally{btn.disabled=false;}
 }
@@ -1270,7 +1281,7 @@ function applyEmbeddedCalendarState(){
       for(const z of ["A","B","C"])if(Array.isArray(s.officialSchoolRecords[z]))officialSchoolRecords[z]=s.officialSchoolRecords[z].filter(r=>r&&/^\d{4}-\d{2}-\d{2}$/.test(r.start)&&/^\d{4}-\d{2}-\d{2}$/.test(r.end)&&typeof r.name==="string");
     }
     if(typeof s.holidayLastUpdated==="string")holidayLastUpdated=s.holidayLastUpdated;
-    if(holidayLastUpdated)document.getElementById("holidayUpdateStatus").textContent="Official dates cached: "+new Date(holidayLastUpdated).toLocaleDateString();
+    if(holidayLastUpdated)document.getElementById("holidayUpdateStatus").textContent="Official dates cached: "+new Date(holidayLastUpdated).toLocaleDateString("en-GB");
     if(Array.isArray(s.familyEvents))familyEvents=s.familyEvents.filter(e=>e&&typeof e.title==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(e.date)).map(e=>({id:String(e.id),title:e.title,date:e.date,time:e.time||"",notes:e.notes||""}));
     if(s.customEventNames){Object.keys(customEventNames).forEach(k=>delete customEventNames[k]);Object.assign(customEventNames,s.customEventNames);}
     if(s.customEventPlaces){Object.keys(customEventPlaces).forEach(k=>delete customEventPlaces[k]);Object.assign(customEventPlaces,s.customEventPlaces);}
@@ -1425,7 +1436,7 @@ document.getElementById("exportOutlookBtn").onclick=()=>{
   const localIso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
   const todayIso=localIso(openedAt);
   const opened=document.getElementById("openedDateValue");
-  if(opened) opened.textContent=openedAt.toLocaleDateString(undefined,{weekday:"short",day:"2-digit",month:"short",year:"numeric"});
+  if(opened) opened.textContent=openedAt.toLocaleDateString("en-GB",{weekday:"short",day:"2-digit",month:"short",year:"numeric"});
 
   function updateLiveCountdown(){
     const daysEl=document.getElementById("countdownDaysValue");
@@ -1470,42 +1481,42 @@ document.getElementById("exportOutlookBtn").onclick=()=>{
 
 document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Show / hide "+b.textContent.trim()+" calendar line");
 </script><iframe id="print_frame" name="print_frame" title="Calendar print frame" style="position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden" src="about:blank"></iframe>
-<div id="iphone-shell" lang="fr">
+<div id="iphone-shell" lang="en">
   <header class="ios-top"><div class="ios-eyebrow">RACING OPERATIONS · V64</div><div class="ios-title">Race <span>Calendar</span></div><div class="ios-sub">ELMS · WEC · IMSA · Endurance · Additional</div></header>
-  <div class="ios-control"><select aria-label="Année" class="ios-select" id="ios-year"></select><div class="ios-status" id="ios-status" role="status">Enregistré localement</div></div>
-  <div class="ios-stats"><div class="ios-stat"><span class="ios-value" id="ios-away">0</span><small>Jours absents</small></div><div class="ios-stat"><span class="ios-value" id="ios-work">0</span><small>Jours travail</small></div><div class="ios-stat"><span class="ios-value" id="ios-travel">0</span><small>Jours voyage</small></div></div>
-  <nav class="ios-tabs" aria-label="Vues du calendrier"><button type="button" id="ios-tab-agenda" data-tab="agenda" aria-selected="true">Agenda</button><button type="button" id="ios-tab-months" data-tab="months" aria-selected="false">Calendar</button><button type="button" id="ios-tab-tariffs" data-tab="tariffs" aria-selected="false">Tariffs</button><button type="button" id="ios-tab-invoicing" data-tab="invoicing" aria-selected="false">Invoicing</button><button type="button" id="ios-tab-settings" data-tab="settings" aria-selected="false">Settings</button></nav>
+  <div class="ios-control"><select aria-label="Year" class="ios-select" id="ios-year"></select><div class="ios-status" id="ios-status" role="status">Saved locally</div></div>
+  <div class="ios-stats"><div class="ios-stat"><span class="ios-value" id="ios-away">0</span><small>Days away</small></div><div class="ios-stat"><span class="ios-value" id="ios-work">0</span><small>Work days</small></div><div class="ios-stat"><span class="ios-value" id="ios-travel">0</span><small>Travel days</small></div></div>
+  <nav class="ios-tabs" aria-label="Calendar views"><button type="button" id="ios-tab-agenda" data-tab="agenda" aria-selected="true">Agenda</button><button type="button" id="ios-tab-months" data-tab="months" aria-selected="false">Calendar</button><button type="button" id="ios-tab-tariffs" data-tab="tariffs" aria-selected="false">Tariffs</button><button type="button" id="ios-tab-invoicing" data-tab="invoicing" aria-selected="false">Invoicing</button><button type="button" id="ios-tab-settings" data-tab="settings" aria-selected="false">Settings</button></nav>
   <main class="ios-content">
-   <section id="ios-agenda" aria-label="Événements"><div id="ios-event-list"></div></section>
-   <section id="ios-months" aria-label="Calendrier mensuel" hidden><button class="ios-btn secondary" id="v64-full-calendar">Open full desktop calendar</button><div id="ios-month-list"></div></section>
-   <section id="ios-tariffs" hidden></section><section id="ios-invoicing" hidden></section><section id="ios-settings" aria-label="Sauvegarde et options" hidden>
-    <div class="ios-settings-card"><h3>Sauvegarde du calendrier</h3><p>Les modifications sont enregistrées automatiquement sur cet iPhone. Exporte régulièrement un fichier JSON pour ne pas perdre tes données si le stockage de l’application est effacé.</p><button type="button" class="ios-btn" id="ios-backup">Exporter ma sauvegarde JSON</button></div>
-    <div class="ios-settings-card"><h3>Restaurer une sauvegarde</h3><p>Importer une sauvegarde JSON de cette application, ou un fichier HTML créé avec « SAVE CALENDAR FILE » dans la V62 sur ton Lenovo.</p><button type="button" class="ios-btn secondary" id="ios-import">Importer JSON / HTML V62</button><input type="file" id="ios-import-file" accept=".json,.html,application/json,text/html" hidden></div>
-    <div class="ios-settings-card"><h3>Version complète V64</h3><p>Accéder à toutes les fonctions du calendrier original, notamment tarifs, impression, export .ICS, jours fériés et événements familiaux. La vue de bureau peut défiler horizontalement.</p><button type="button" class="ios-btn secondary" id="ios-desktop">Ouvrir la version complète</button></div>
+   <section id="ios-agenda" aria-label="Events"><div id="ios-event-list"></div></section>
+   <section id="ios-months" aria-label="Monthly calendar" hidden><button class="ios-btn secondary" id="v64-full-calendar">Open full desktop calendar</button><div id="ios-month-list"></div></section>
+   <section id="ios-tariffs" hidden></section><section id="ios-invoicing" hidden></section><section id="ios-settings" aria-label="Backup and settings" hidden>
+    <div class="ios-settings-card"><h3>Calendar backup</h3><p>Changes are saved automatically on this device. Export a JSON backup regularly to keep your data safe if application storage is cleared.</p><button type="button" class="ios-btn" id="ios-backup">Export JSON backup</button></div>
+    <div class="ios-settings-card"><h3>Restore a backup</h3><p>Import a JSON backup from this application or an HTML file created using SAVE CALENDAR FILE in V62 on your Lenovo.</p><button type="button" class="ios-btn secondary" id="ios-import">Import JSON / V62 HTML</button><input type="file" id="ios-import-file" accept=".json,.html,application/json,text/html" hidden></div>
+    <div class="ios-settings-card"><h3>Full desktop version V64</h3><p>Access all original calendar features, including tariffs, printing, ICS export, holidays and family events. The desktop view supports horizontal scrolling.</p><button type="button" class="ios-btn secondary" id="ios-desktop">Open full desktop version</button></div>
     <div id="v64-sync"></div><p class="ios-bottomhint">Local-first. Optional private Supabase synchronization between your devices.</p>
    </section>
   </main>
-  <button type="button" id="ios-add" class="ios-fab" aria-label="Ajouter un événement">+</button>
-  <div class="ios-overlay" id="ios-editor" hidden><div class="ios-panel" role="dialog" aria-modal="true" aria-labelledby="ios-editor-title"><div class="ios-panel-head"><h2 id="ios-editor-title">Nouvel événement</h2><button type="button" class="ios-close" id="ios-close" aria-label="Fermer">×</button></div>
-    <form class="ios-form" id="ios-form"><label for="ios-field-series">Championnat</label><select id="ios-field-series" required><option value="ELMS">ELMS</option><option value="WEC">WEC</option><option value="IMSA">IMSA</option><option value="OTHER">Le Mans / Autres courses</option><option value="ADDITIONAL">Additional</option></select><label for="ios-field-name">Nom de l'événement</label><input id="ios-field-name" placeholder="Ex : 24H Le Mans" maxlength="120" required><label for="ios-field-place">Lieu</label><input id="ios-field-place" placeholder="Circuit / pays" maxlength="120">
-    <div class="ios-two"><div><label for="ios-field-start">Départ / 1er jour</label><input id="ios-field-start" type="date" required></div><div><label for="ios-field-end">Retour / dernier jour</label><input id="ios-field-end" type="date" required></div></div><div class="ios-form-error" id="ios-form-error" role="alert"></div>
-    <div class="ios-form-actions"><button class="ios-btn" type="submit">Enregistrer</button><button class="ios-btn danger" type="button" id="ios-delete" hidden>Supprimer</button></div></form>
+  <button type="button" id="ios-add" class="ios-fab" aria-label="Add an event">+</button>
+  <div class="ios-overlay" id="ios-editor" hidden><div class="ios-panel" role="dialog" aria-modal="true" aria-labelledby="ios-editor-title"><div class="ios-panel-head"><h2 id="ios-editor-title">New event</h2><button type="button" class="ios-close" id="ios-close" aria-label="Close">×</button></div>
+    <form class="ios-form" id="ios-form"><label for="ios-field-series">Championship</label><select id="ios-field-series" required><option value="ELMS">ELMS</option><option value="WEC">WEC</option><option value="IMSA">IMSA</option><option value="OTHER">Le Mans / Other races</option><option value="ADDITIONAL">Additional</option></select><label for="ios-field-name">Event name</label><input id="ios-field-name" placeholder="e.g. 24H Le Mans" maxlength="120" required><label for="ios-field-place">Location</label><input id="ios-field-place" placeholder="Circuit / country" maxlength="120">
+    <div class="ios-two"><div><label for="ios-field-start">Departure / first day</label><input id="ios-field-start" type="date" required></div><div><label for="ios-field-end">Return / last day</label><input id="ios-field-end" type="date" required></div></div><div class="ios-form-error" id="ios-form-error" role="alert"></div>
+    <div class="ios-form-actions"><button class="ios-btn" type="submit">Save</button><button class="ios-btn danger" type="button" id="ios-delete" hidden>Delete</button></div></form>
   </div></div>
-  <div class="ios-overlay" id="ios-day-overlay" hidden><div class="ios-panel" role="dialog" aria-modal="true"><div class="ios-panel-head"><h2 id="ios-day-heading">Date</h2><button class="ios-close" type="button" id="ios-day-close" aria-label="Fermer">×</button></div><div id="ios-day-events"></div></div></div>
+  <div class="ios-overlay" id="ios-day-overlay" hidden><div class="ios-panel" role="dialog" aria-modal="true"><div class="ios-panel-head"><h2 id="ios-day-heading">Date</h2><button class="ios-close" type="button" id="ios-day-close" aria-label="Close">×</button></div><div id="ios-day-events"></div></div></div>
 </div>
-<button id="returnPhone" type="button">↩ Version iPhone</button>
+<button id="returnPhone" type="button">↩ Mobile view</button>
 <script src="./vendor/supabase.js"></script><script src="./v64.js"></script><script id="ios-app-controller">
 (()=>{
   'use strict';
   const APP_KEY='loic-racing-calendar-pwa-v1';
   const SERIES=['ELMS','WEC','IMSA','OTHER','ADDITIONAL'];
-  const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
   const LABEL={ELMS:'ELMS',WEC:'WEC',IMSA:'IMSA',OTHER:'ENDURANCE',ADDITIONAL:'ADDITIONAL'};
   const COLORS={ELMS:'#bc963d',WEC:'#398ac7',IMSA:'#df755e',OTHER:'#9783df',ADDITIONAL:'#8c9ca8'};
   const el=id=>document.getElementById(id);
   let tab='agenda',editing=null,ready=false,saveTimer=null, renderTimer=null,restoring=false;
   const escapeHTML=str=>String(str??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  function compact(d){return Number(d.slice(8,10))+' '+MONTHS[Number(d.slice(5,7))-1].slice(0,3).toLowerCase();}
+  function compact(d){return Number(d.slice(8,10))+' '+MONTHS[Number(d.slice(5,7))-1].slice(0,3);}
   function snapshot(){
     snapshotYear();
     const saved=collectCalendarState();
@@ -1518,17 +1529,17 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
   }
   function persist(){
     if(!ready||restoring||window.calendarStorageBlocked)return;
-    try{localStorage.setItem(APP_KEY,JSON.stringify(snapshot()));el('ios-status').textContent='Enregistré sur cet appareil';window.dispatchEvent(new Event('calendar-saved'));}
-    catch(e){el('ios-status').textContent='Stockage indisponible : exporter une sauvegarde';console.warn('Cannot save calendar',e);}
+    try{localStorage.setItem(APP_KEY,JSON.stringify(snapshot()));el('ios-status').textContent='Saved on this device';window.dispatchEvent(new Event('calendar-saved'));}
+    catch(e){el('ios-status').textContent='Storage unavailable: export a backup';console.warn('Cannot save calendar',e);}
   }
   function saveSoon(){
     if(!ready||restoring||window.calendarStorageBlocked)return;
-    el('ios-status').textContent='Enregistrement…';
+    el('ios-status').textContent='Saving…';
     clearTimeout(saveTimer);saveTimer=setTimeout(persist,260);
     clearTimeout(renderTimer);renderTimer=setTimeout(renderMobile,100);
   }
   function restore(s){
-    if(!s||!s.selected||typeof s.selected!=='object')throw new Error('Fichier JSON non reconnu');
+    if(!s||!s.selected||typeof s.selected!=='object')throw new Error('Unrecognized JSON file');
     window.calendarV64?.validate(s);
     restoring=true;
     try{
@@ -1572,7 +1583,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
   function eventHtml(ev,i){
     const from=compact(ev.a),to=compact(ev.b);
     const days=range(ev.a,ev.b).length;
-    return `<button type="button" class="ios-event" data-event-index="${i}" style="--event-color:${COLORS[ev.s]}"><span class="ios-accent"></span><span class="ios-event-main"><span class="ios-event-title">${escapeHTML(ev.name)}</span><span class="ios-event-meta"><span class="ios-chip">${LABEL[ev.s]}</span><span>${from}${ev.a!==ev.b?' → '+to:''}</span><span>${days} j</span>${ev.place?`<span>${escapeHTML(ev.place)}</span>`:''}</span></span><span class="ios-chevron">›</span></button>`;
+    return `<button type="button" class="ios-event" data-event-index="${i}" style="--event-color:${COLORS[ev.s]}"><span class="ios-accent"></span><span class="ios-event-main"><span class="ios-event-title">${escapeHTML(ev.name)}</span><span class="ios-event-meta"><span class="ios-chip">${LABEL[ev.s]}</span><span>${from}${ev.a!==ev.b?' → '+to:''}</span><span>${days} ${days===1?'day':'days'}</span>${ev.place?`<span>${escapeHTML(ev.place)}</span>`:''}</span></span><span class="ios-chevron">›</span></button>`;
   }
   function renderAgenda(items){
     let markup='';
@@ -1581,7 +1592,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
       if(!x.length)continue;
       markup+=`<section class="ios-section"><h2>${MONTHS[m]}</h2>${x.map(e=>eventHtml(e,e.index)).join('')}</section>`;
     }
-    el('ios-event-list').innerHTML=markup||'<div class="ios-empty">Aucun événement enregistré cette année.<br>Appuie sur + pour en créer un.</div>';
+    el('ios-event-list').innerHTML=markup||'<div class="ios-empty">No events saved for this year.<br>Tap + to add one.</div>';
   }
   function renderMonths(){
     let markup='';
@@ -1598,9 +1609,9 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
         const present=SERIES.filter(s=>selected[s].has(ds));
         if(present.length)occupied++;
         const dow=new Date(Date.UTC(currentYear,m-1,day)).getUTCDay();
-        dates+=`<button type="button" class="ios-day ${dow===0||dow===6?'weekend':''} ${today===ds?'today':''}" data-date="${ds}" aria-label="${day} ${MONTHS[m-1]} : ${present.join(', ')||'libre'}"><span>${day}</span><span class="ios-dotrow">${present.map(s=>`<i class="ios-dot" style="background:${COLORS[s]}"></i>`).join('')}</span></button>`;
+        dates+=`<button type="button" class="ios-day ${dow===0||dow===6?'weekend':''} ${today===ds?'today':''}" data-date="${ds}" aria-label="${day} ${MONTHS[m-1]} : ${present.join(', ')||'free'}"><span>${day}</span><span class="ios-dotrow">${present.map(s=>`<i class="ios-dot" style="background:${COLORS[s]}"></i>`).join('')}</span></button>`;
       }
-      markup+=`<section class="ios-mcard"><div class="ios-mhead">${MONTHS[m-1]}<small>${occupied} jours occupés</small></div><div class="ios-week"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div><div class="ios-grid">${dates}</div><div class="month-events">${runs().map((e,i)=>({...e,index:i})).filter(e=>Number(e.a.slice(5,7))<=m&&Number(e.b.slice(5,7))>=m).map(e=>eventHtml(e,e.index)).join('')}</div></section>`;
+      markup+=`<section class="ios-mcard"><div class="ios-mhead">${MONTHS[m-1]}<small>${occupied} occupied days</small></div><div class="ios-week"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div class="ios-grid">${dates}</div><div class="month-events">${runs().map((e,i)=>({...e,index:i})).filter(e=>Number(e.a.slice(5,7))<=m&&Number(e.b.slice(5,7))>=m).map(e=>eventHtml(e,e.index)).join('')}</div></section>`;
     }
     el('ios-month-list').innerHTML=markup;
   }
@@ -1627,7 +1638,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
   }
   function openEditor(item=null){
     editing=item?{...item}:null;
-    el('ios-editor-title').textContent=editing?'Modifier l’événement':'Nouvel événement';
+    el('ios-editor-title').textContent=editing?'Edit event':'New event';
     el('ios-field-series').value=editing?.s||'ELMS';
     el('ios-field-name').value=editing?.name||'';
     el('ios-field-place').value=editing?.place||'';
@@ -1642,17 +1653,17 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
   function openDay(date){
     const dayEvents=eventFromDate(date);
     el('ios-day-heading').textContent=compact(date)+' '+date.slice(0,4);
-    el('ios-day-events').innerHTML=dayEvents.length?dayEvents.map(x=>{const i=runs().findIndex(z=>z.s===x.s&&z.a===x.a&&z.b===x.b);return eventHtml(x,i)}).join(''):'<p class="ios-day-detail">Aucun événement ce jour.</p>';
+    el('ios-day-events').innerHTML=dayEvents.length?dayEvents.map(x=>{const i=runs().findIndex(z=>z.s===x.s&&z.a===x.a&&z.b===x.b);return eventHtml(x,i)}).join(''):'<p class="ios-day-detail">No events on this day.</p>';
     el('ios-day-overlay').hidden=false;
   }
   function validateDates(s,a,b){
-    if(!/^(20\d{2})-\d{2}-\d{2}$/.test(a)||!/^(20\d{2})-\d{2}-\d{2}$/.test(b)||!parse(a)||!parse(b))return 'Choisis des dates valides.';
-    if(a>b)return 'La date de retour précède la date de départ.';
-    if(!a.startsWith(currentYear+'-')||!b.startsWith(currentYear+'-'))return 'Les deux dates doivent être dans l’année sélectionnée.';
-    if(range(a,b).length>366)return 'Période trop longue.';
+    if(!/^(20\d{2})-\d{2}-\d{2}$/.test(a)||!/^(20\d{2})-\d{2}-\d{2}$/.test(b)||!parse(a)||!parse(b))return 'Choose valid dates.';
+    if(a>b)return 'The return date is before the departure date.';
+    if(!a.startsWith(currentYear+'-')||!b.startsWith(currentYear+'-'))return 'Both dates must be in the selected year.';
+    if(range(a,b).length>366)return 'Date range is too long.';
     const oldSet=new Set(editing?range(editing.a,editing.b):[]);
     const clashes=range(a,b).some(d=>selected[s].has(d)&&!(editing?.s===s&&oldSet.has(d)));
-    if(clashes)return 'Des dates chevauchent déjà un événement dans ce championnat.';
+    if(clashes)return 'These dates overlap an existing event in this championship.';
     return '';
   }
   function commitEditor(evt){
@@ -1662,7 +1673,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
     const place=el('ios-field-place').value.trim();
     const a=el('ios-field-start').value,b=el('ios-field-end').value;
     const error=validateDates(s,a,b);
-    if(!name||error){el('ios-form-error').textContent=error||'Renseigne un nom d’événement.';return;}
+    if(!name||error){el('ios-form-error').textContent=error||'Enter an event name.';return;}
     if(editing){for(const d of range(editing.a,editing.b)){
        selected[editing.s].delete(d);
        delete customEventNames[editing.s+'|'+d];delete customEventPlaces[editing.s+'|'+d];
@@ -1672,7 +1683,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
     closeEditor();refresh();renderMobile();saveSoon();
   }
   function deleteEditor(){
-    if(!editing||!confirm('Supprimer cet événement ?'))return;
+    if(!editing||!confirm('Delete this event?'))return;
     for(const d of range(editing.a,editing.b)){
       selected[editing.s].delete(d);
       delete customEventNames[editing.s+'|'+d];delete customEventPlaces[editing.s+'|'+d];
@@ -1685,7 +1696,7 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
     const filename='racing_calendar_backup_'+currentYear+'.json';
     try{
       const f=new File([txt],filename,{type:'application/json'});
-      if(navigator.canShare?.({files:[f]})){await navigator.share({title:'Sauvegarde Race Calendar',files:[f]});return;}
+      if(navigator.canShare?.({files:[f]})){await navigator.share({title:'Race Calendar backup',files:[f]});return;}
     }catch(e){if(e.name==='AbortError')return;}
     const u=URL.createObjectURL(new Blob([txt],{type:'application/json'}));
     const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),15000);
@@ -1698,14 +1709,14 @@ document.querySelectorAll(".toolbar button[data-series]").forEach(b=>b.title="Sh
       if(file.name.toLowerCase().endsWith('.html')){
         const doc=new DOMParser().parseFromString(raw,'text/html');
         const embedded=doc.getElementById('embeddedCalendarState');
-        if(!embedded)throw new Error('Ce fichier HTML ne contient pas de sauvegarde V62. Sur ton Lenovo, utilise « SAVE CALENDAR FILE ».');
+        if(!embedded)throw new Error('This HTML file contains no V62 backup. Use SAVE CALENDAR FILE on your Lenovo.');
         s=JSON.parse(embedded.textContent);
       }else s=JSON.parse(raw);
-      if(!s.selected||!s.year)throw new Error('Sauvegarde invalide');
-      if(!confirm('Remplacer les données actuelles par cette sauvegarde ?'))return;
+      if(!s.selected||!s.year)throw new Error('Invalid backup');
+      if(!confirm('Replace current data with this backup?'))return;
       window.calendarV64.validate(s);localStorage.setItem(APP_KEY+'-before-import',JSON.stringify(snapshot()));
-      restore(s);window.calendarStorageBlocked=false;persist();showTab('agenda');el('ios-status').textContent='Sauvegarde restaurée';
-    }catch(err){alert('Impossible de restaurer ce fichier : '+err.message)}
+      restore(s);window.calendarStorageBlocked=false;persist();showTab('agenda');el('ios-status').textContent='Backup restored';
+    }catch(err){alert('Unable to restore this file: '+err.message)}
     finally{e.target.value='';}
   }
   function init(){

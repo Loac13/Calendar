@@ -59,7 +59,7 @@ test('JSON and standalone HTML exports preserve V64 and omit credentials',async(
  // Import the actual exported HTML into the current application.
  await page.click('#returnPhone');await page.click('#ios-tab-settings');page.once('dialog',d=>d.accept());
  await page.locator('#ios-import-file').setInputFiles({name:'saved.html',mimeType:'text/html',buffer:Buffer.from(text)});
- await expect(page.locator('#ios-status')).toContainText('restaurée');expect(await page.evaluate(()=>calendarApp.snapshot())).toEqual(state);
+ await expect(page.locator('#ios-status')).toContainText('Backup restored');expect(await page.evaluate(()=>calendarApp.snapshot())).toEqual(state);
 });
 test('installed app loads and edits offline with cached local assets',async({browser})=>{
  const context=await browser.newContext();const page=await context.newPage();await page.goto('http://127.0.0.1:8765');await page.waitForFunction(()=>!!window.calendarApp);await page.evaluate(()=>navigator.serviceWorker.ready);await page.reload();await page.waitForFunction(()=>!!navigator.serviceWorker.controller);

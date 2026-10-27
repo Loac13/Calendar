@@ -1,5 +1,5 @@
 /* Racing Calendar iPhone / GitHub Pages: update-safe offline cache. */
-const CACHE = 'race-calendar-github-pages-v64';
+const CACHE = 'race-calendar-github-pages-v64-english';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png', './v64.js', './v64.css', './vendor/supabase.js', './vendor/html2canvas.js'];
 
 self.addEventListener('install', (event) => {
