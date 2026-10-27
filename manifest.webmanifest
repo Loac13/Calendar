@@ -2,14 +2,14 @@
   "id": "./",
   "name": "Racing Operations Calendar",
   "short_name": "Race Calendar",
-  "description": "Calendrier de courses et déplacements, ELMS WEC IMSA 2027–2036",
+  "description": "Racing and travel calendar, ELMS WEC IMSA 2027–2036",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#080d14",
   "theme_color": "#10251e",
-  "lang": "fr",
+  "lang": "en",
   "icons": [
     {
       "src": "./icon-192.png",
