@@ -1,12 +1,12 @@
 /* Racing Calendar iPhone / GitHub Pages: update-safe offline cache. */
-const CACHE = 'race-calendar-github-pages-v62-1-month-titles';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
+const CACHE = 'race-calendar-github-pages-v64';
+const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png', './v64.js', './v64.css', './vendor/supabase.js', './vendor/html2canvas.js'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k.startsWith('race-calendar-github-pages-') && k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
 });
 self.addEventListener('fetch', (event) => {
   const request = event.request;
@@ -29,8 +29,8 @@ self.addEventListener('fetch', (event) => {
           event.waitUntil(caches.open(CACHE).then((cache) => cache.put(request, copy)));
         }
         return response;
-      });
-      return cached || network.catch(() => Response.error());
+      }).catch(() => Response.error());
+      return cached || network;
     }));
   }
 });
